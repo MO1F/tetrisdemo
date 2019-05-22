@@ -33,6 +33,7 @@ var addBlock=false;//判断是否增加行标记
 
 //定义刷新时间变量
 var gtime=500;//方块速度
+var gtime_default=500;//默认速度
 var hardgitime=350;//高难度初始速度
 //定义方块大小
 var BLOCK_R = 4;
@@ -179,6 +180,9 @@ var BLOCKS = [
   [0,0,0,0]]
 ]
 ];
+
+
+var rBlocks=[0,1,2,3,4,5,6];
 //定义地图，初值为0表示空；
 var map = [];
 for(var r = 0; r < MAP_R; r++) {
@@ -521,6 +525,7 @@ document.onkeydown = function(event) {
     drawBlock();
     makeShadow();
     drawShadow();
+    clearInterval(timer);
     timer = setInterval(loop, gtime);
     
   }
@@ -559,7 +564,7 @@ function nextBlock() {//生成下下个方块
     currR--;
   }
 
-  nextType = randInt(0, BLOCKS.length);
+  nextType = randomBlock();
   nextDir = randInt(0, 4);
   easeNext();
   drawNext();
@@ -615,7 +620,9 @@ function loop() {//游戏运行函数
           playerNumber:playerNumber
         });
       }
+      gstart=false;
       //onlinGameFlag==false;
+     // $('atkdebug').innerHTML+="1次 ";
       gameOverDisplay();
       return;
     }
@@ -753,9 +760,11 @@ function easeatktips(){
     div.className="";
   }
 }
-
 function speedchange(){
   if(onlinGameFlag==true){
+    return;
+  }
+  if(gstart==false){
     return;
   }
   if(gtime<=150){
@@ -764,6 +773,19 @@ function speedchange(){
   gtime-=10;
   clearInterval(timer);//清除计时器timer
   timer = setInterval(loop, gtime);  //建立计时器timer
+}
+
+function randomBlock(){
+  if(rBlocks.length==0){
+    rBlocks=[0,1,2,3,4,5,6];
+    //$('atkdebug').innerHTML+="<br>";
+
+  }
+  var blocknum=randInt(0,rBlocks.length);
+  var k=rBlocks[blocknum];
+  //$('atkdebug').innerHTML+=k+" ";
+  rBlocks.splice(blocknum, 1);
+  return k;
 }
 function init() {//初始化  定义游戏截面大小 填充方格
 

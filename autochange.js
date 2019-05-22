@@ -9,7 +9,7 @@ function autochangetimer(){
 }
 function autochange(){
 	if(phoneflag==false){
-		
+		phoneflag=check();
 		return;
 	}
 	phoneflag=check();

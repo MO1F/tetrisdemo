@@ -89,7 +89,7 @@
 
 <div class="ranking">
 <div class="exit"onclick="exitshift('ranking')" onmouseover="mon(this)" onmouseout="moff(this)"><</div>
-  <div class="title">排行榜页面</div>
+  <div class="title">排行榜</div>
   <div class="recordbox">
     <div class="recordhead">
       <div class="ranknum">排名</div><div class="rankname">玩家名</div><div class="rankgrade">玩家得分</div>
@@ -123,8 +123,7 @@
     <div class="downButtom vButtom" onclick="clickbtm(KEY_ACCELERATE)"></div>
     <div class="rightButtom vButtom" onclick="clickbtm(KEY_RIGHT)"></div>
   </div>
-     <div id="atkdebug" style="display: none;"><input type="button" name="123" onclick="switchaddrow()" value="增行测试">
-    <input type="button" name="345" onclick="attackgamer()" value="攻击测试"></div>
+     <div id="atkdebug" ></div>
 </div>
  
   <div id="debug" style="display: none"></div>
@@ -134,7 +133,7 @@
 <script type="text/javascript" src="tetris.js"></script>
 
 <script>
-//定义游戏开始标识
+//定义游戏开始标识style="display: none;"
 var gstart=false;
 var phoneflag=true;
 /*——————————————————————————————————————————————联机游戏相关定义参数————————————————————————————————————————————————————————*/
@@ -164,6 +163,9 @@ function gamestart() {//单人游戏初始化
 document.getElementsByClassName("menu")[0].style.display="none";
 document.getElementsByClassName("box")[0].style.display="block";
 init();
+if(attribute==1){
+    gtime=hardgitime;
+}
 setInterval(speedchange,5000);
 printGrade();
 nextBlock();
@@ -326,6 +328,7 @@ function gamerestart(){
         space.removeChild(div);
       }
   }
+  gtime=gtime_default;
   pause = false;
   gstart=true;
   init();
@@ -334,7 +337,7 @@ function gamerestart(){
   drawBlock();
   makeShadow();
   drawShadow();
-  timer = setInterval(loop, gtime);
+//  timer = setInterval(loop, gtime);
   var displaydiv=document.getElementsByClassName('goinfo')[0];
   var gameboxdiv=document.getElementsByClassName("gamebox")[0];
   if(displaydiv){
@@ -401,7 +404,7 @@ function shift(classname){
     var se=$('se');
     var attr=document.getElementsByName('rank');
     video.value=musicvalue;
-    se.defaultValue=0;//////////se音量未设置
+    se.value=sevalue;
     for(var i=0;i<attr.length;i++){
       if(attr[i].value==attribute_default)
         attr[i].checked=true;
@@ -558,6 +561,7 @@ if(onlinGameFlag==true&&gstart==true){
   exitshift('room');
   socket.removeListener("flashgame");
 }
+gtime=gtime_default;
 clearInterval(timer);
 for(var r = 0; r < MAP_R; r++) {
   map.push([]);
