@@ -109,11 +109,13 @@ body{
 	margin:10px auto;
 	background: #FFF;
 }
+.recordhead{
+	background: #f8faff;
+}
 .recordhead div{
 	font-size: 20px;
 	line-height: 30px;
 	height: 30px;
-	background: yellow;
 	text-align: center;
 	border-top: 1px solid;
 }
@@ -140,7 +142,7 @@ body{
 	font-size: 20px;
 	line-height: 30px;
 	height: 30px;
-	background: #EEE;
+	background: #FFF;
 	text-align: center;
 }
 .title{
