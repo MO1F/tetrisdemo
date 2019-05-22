@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="charset-8"/>
+  <title> new document </title>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body  onresize="autochangetimer()">
+  <audio id="BGM" src="bgm/Korobeiniki.mp3" loop="loop" controls="controls" style="display: none"> autoplay="autoplay"</audio>
+  <audio id="SE" src="bgm/music.mp3" controls="controls" style="display: none"></audio>
+  
+  <div class="menu">
+    <div class="gtitle">联机俄罗斯方块</div>
+    <div class="menubox">
+      <a onclick="gamestart()">单人游戏</a>
+      <a onclick="shift('online')" >联机游戏</a>
+      <a onclick="shift('option')" >设置</a>
+      <a onclick="shift('ranking')" >排行榜</a>
+      <a href="" onclick="window.close();">退出游戏</a>
+    </div>
+  </div>
+<div class="online">
+  <div class="exit" id="exit1" onclick="exitshift('online')" onmouseover="mon(this)" onmouseout="moff(this)"><</div>
+  <div class="title">房间选择</div>
+    <div class="roomlisthead roomborder">
+      <div class="roomnumber">&nbsp;&nbsp;房间号</div>
+      <div class="roomulname">&nbsp;&nbsp;房间名</div>
+      <div class="roomcount">&nbsp;&nbsp;当前人数/总人数</div>
+      <div class="roomflag">&nbsp;&nbsp;房间状态</div>
+    </div>
+  <div class="roomlist">
+  </div>
+  <div class="obottom">
+    <div class="oleft">
+      <div class="croom left btm" onclick="shift('createroom')"  onmouseover="mon(this)" onmouseout="moff(this)">创建房间</div>
+      <div class="croom left btm" onclick="flashroom()"  onmouseover="mon(this)" onmouseout="moff(this)">刷新</div>
+    </div>
+  <div class="oright">
+     <input type="text" name="eroomnum" class="einput left">
+  <div class="btm enterroom  left" onclick="enterroom()" onmouseover="mon(this)" onmouseout="moff(this)">加入房间</div>
+  </div>
+</div>
+  
+
+ 
+</div>
+<div class="createroom" style="display: none">
+  <div class="exit"onclick="exitshift('createroom')" onmouseover="mon(this)" onmouseout="moff(this)"><</div>
+  <div class="title">创建房间</div>
+  <div class="croombox">
+  <div class="roominfo">房 间 名 ：<input class="rinput" type="text" name="roomname" maxlength="16"onblur="checkrname(this)"><span id="roomnamedebug"></span></div>
+  <div class="roominfo">房间人数：<input class="rinput" type="text" name="roomcount" onblur="checknumber(this)"><span id="roominfodebug"></span></div>
+  <div class="roomcode">房间密码：有<input type="radio" name="rpwordjudge" value="0" onclick="pwchecked(this)">
+                                 无<input type="radio" name="rpwordjudge" value="1" checked="true" onclick="pwchecked(this)"><br>
+    密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:&nbsp;&nbsp;<input class="rinput" type="text" name="roompword" maxlength="10"></div>
+  <div class="btmbox"><div class="btm" onclick="createroom()" onmouseover="mon(this)" onmouseout="moff(this)">确认</div>
+  <div onclick="reduction2()" class="btm" onmouseover="mon(this)" onmouseout="moff(this)">重置</div></div>
+  </div>
+</div>
+<div class="room" style="display: none">
+  <div class="exit"onclick="exitshift('room')" onmouseover="mon(this)" onmouseout="moff(this)"><</div>
+  <div id="roomname"></div>
+  <div id="playerslist"></div>
+  <div class="readybtmbox">
+    <div class="readybtm btm" onclick="readygame()" onmouseover="mon(this)" onmouseout="moff(this)">准备游戏</div>
+  </div>
+  
+</div>
+<div class="option">
+  <div class="exit" onclick="exitshift('option')" onmouseover="mon(this)" onmouseout="moff(this)"><</div>
+  <div class="title">设置</div>
+  <div class="opbox">
+    <div class="opcenter">
+      <div class="attribute">音量：<input type="range" id="video" min="0" max="100" step="1" onchange="changevolume()" class="range"/></div>
+      <div class="attribute">音效：<input type="range" id="se" min="0" max="100" step="1" onchange="changeSevolume()" class="range"/></div>
+      <div class="attribute">难度：<input name="rank" type="radio" value="1" onclick="changehard(this.value)" />简单
+                              <input name="rank" type="radio" value="2" onclick="changehard(this.value)" />普通</div>
+    </div>
+    <div class="btmcenter">
+      <div class="button btm" onclick="exitshift('option')" onmouseover="mon(this)" onmouseout="moff(this)">返回</div>
+      <div class="button btm" onclick="reduction()" onmouseover="mon(this)" onmouseout="moff(this)">还原</div> 
+    </div>
+    
+  </div>
+
+</div>
+
+<div class="ranking">
+<div class="exit"onclick="exitshift('ranking')" onmouseover="mon(this)" onmouseout="moff(this)"><</div>
+  <div class="title">排行榜页面</div>
+  <div class="recordbox">
+    <div class="recordhead">
+      <div class="ranknum">排名</div><div class="rankname">玩家名</div><div class="rankgrade">玩家得分</div>
+    </div>
+    <div class="reocrdlist">
+      
+    </div>
+  </div>
+</div>
+<div class="box">
+  <div class="leftbox"> 
+    <div class="exit"  onclick="exitgame()" onmouseover="mon(this)" onmouseout="moff(this)"><</div>
+  <div class="gamerlist">
+  </div>
+  
+</div>
+<div class="atktips" id="atktips"></div>
+  <div class="gamebox" id="space"></div>
+  <div class="rightbox">
+    <div class='r1'>
+      <div>得分：</div><div id="grade"></div>
+    </div>
+    <div class='r2'>
+      <div class="nextText">next:</div><div id='nextBlocks'></div>
+    </div>    
+  </div>
+  <div class="vbuttombox">
+    <div class="vSpace upSPace" onclick="clickbtm(KEY_ONE_STOP)"></div>
+    <div class="upButtom vButtom" onclick="clickbtm(KEY_ROTATE)"></div>
+    <div class="leftButtom vButtom" onclick="clickbtm(KEY_LEFT)"></div>
+    <div class="downButtom vButtom" onclick="clickbtm(KEY_ACCELERATE)"></div>
+    <div class="rightButtom vButtom" onclick="clickbtm(KEY_RIGHT)"></div>
+  </div>
+     <div id="atkdebug"><input type="button" name="123" onclick="switchaddrow()" value="增行测试">
+    <input type="button" name="345" onclick="attackgamer()" value="攻击测试"></div>
+</div>
+ 
+  <div id="debug" style="display: none"></div>
+</body>
+<script src="https://cdn.bootcss.com/socket.io/2.2.0/socket.io.js"></script>
+<script type="text/javascript" src="change.js"></script>
+<script type="text/javascript" src="tetris.js"></script>
+
+<script>
+//定义游戏开始标识
+var gstart=false;
+var phoneflag=true;
+/*——————————————————————————————————————————————联机游戏相关定义参数————————————————————————————————————————————————————————*/
+var onlinGameFlag=false;
+var socket;
+var playerNumber;//////////用户ID号
+var playerName;
+var roomnumber;
+var rooms;
+var linkflag=false;
+var roominfo;
+var debug=$('debug');
+var width=document.documentElement.clientWidth;
+var height=document.documentElement.clientHeight;
+/*—————————————————————————————————————————————联机游戏相关定义参数结束—————————————————————————————————————————————————————*/
+var selectedgamer;
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//onload=gamestart();
+//var linknum=0;
+function gamestart() {//单人游戏初始化
+  gstart=true;
+  addnum=0;
+document.getElementsByClassName("menu")[0].style.display="none";
+document.getElementsByClassName("box")[0].style.display="block";
+init();
+setInterval(speedchange,5000);
+printGrade();
+nextBlock();
+drawBlock();
+makeShadow();
+drawShadow();
+if(onlinGameFlag==true){
+initatktips();
+gamerboxini();
+var killnumdiv=document.createElement('div');
+killnumdiv.className="r1";
+var killtext=document.createElement('div');
+killtext.innerHTML="击败数：";
+killnumdiv.appendChild(killtext);
+var killnuminfo=document.createElement('div');
+killnuminfo.id="killnum";
+killnuminfo.innerHTML=0;
+killnumdiv.appendChild(killnuminfo);
+var r2div=$$('r2');
+var rightboxdiv=$$('rightbox');
+rightboxdiv.removeChild(r2div);
+rightboxdiv.appendChild(killnumdiv);
+rightboxdiv.appendChild(r2div);
+socket.on("flashgame",function(data){
+  roominfo=data.room;
+  gamerboxdisplay();
+});
+socket.removeListener('jroom');
+socket.emit("flashmap",{
+  playerNumber:playerNumber,
+  playerMap:map
+});
+
+socket.on("atkinfo",function(data){
+  for(var i=0;i<data.atkrecord.length;i++){
+    var aimnumber=data.atkrecord[i].aimnumber;
+    var thisnumber=data.atkrecord[i].thisnumber;
+    var atknum=data.atkrecord[i].atknum;
+    $('atkdebug').innerHTML+=thisnumber+"攻击"+aimnumber+"增加了"+atknum+"行方块<br>";
+    if(aimnumber==playerNumber){
+      addnum+=atknum;
+    }
+  }
+});
+  //重置按钮
+  socket.removeListener('gamestart');
+  var readybtm=document.getElementsByClassName('readybtm')[0];
+  readybtm.innerHTML="准备游戏";
+  readybtm.removeEventListener("click",unreadygame);
+  readybtm.addEventListener("click",readygame);
+  socket.on('ending',function(data){
+      var gameboxdiv=document.getElementsByClassName("gamebox")[0];
+      var goinfo=document.getElementsByName("goinfo")[0];
+      if(goinfo)
+        gameboxdiv.removeChild(goinfo);
+      var displaydiv=document.createElement("div");
+      promptBox(displaydiv,"body");
+      //displaydiv.className="goinfo";
+      displaydiv.innerHTML="游戏结束"
+      var pinfo=document.createElement('div');
+      pinfo.className="pinfo";
+      var myDate = new Date();
+      var promptinfo="";
+      promptinfo=data.info;
+      pinfo.innerHTML=promptinfo+myDate.toLocaleTimeString();
+      var btm=document.createElement("div");
+      promptBox(btm,"btm");
+      btm.innerHTML="回到房间";
+      displaydiv.appendChild(pinfo);
+      displaydiv.appendChild(btm);
+      btm.addEventListener("click",returnroom);
+      gameboxdiv.appendChild(displaydiv);
+      socket.removeListener("atkinfo");
+      pause=true;
+      gstart=false;
+
+  });
+}
+timer = setInterval(loop, gtime);
+atktimer=setInterval(switchaddrow,2000);
+autogamebox();
+};
+
+
+function gameOverDisplay(){
+  //////////////////////////////////////定义屏幕宽度和高度    将来是全局变量///////////////////////////////////////////////
+
+  var gameboxdiv=document.getElementsByClassName("gamebox")[0];
+  for(var r = 0; r < MAP_R; r++)
+    for(var c = 0; c < MAP_C; c++) {
+      var div = $(r + '-' + c);
+      if(map[r][c].b) {
+        //div.style.backgroundColor = "#555";
+        div.className="c"+colors[7].split('#')[1];
+        div.style.border="1px transparent solid";
+      } else{
+        div.style.backgroundColor = 'transparent';
+      }
+    }
+    gstart=false;
+    var displaydiv=document.createElement("div");
+    displaydiv.innerHTML="游戏结束<br><br>";
+    displaydiv.className="goinfo";
+    promptBox(displaydiv,"body");
+    gameboxdiv.appendChild(displaydiv);
+    if(onlinGameFlag==true){
+      displaydiv.innerHTML="游戏结束<br>请等待其他玩家结束游戏或离开房间<br>";
+      var exitdiv=document.createElement('div');
+      exitdiv.innerHTML="离开房间";
+      promptBox(exitdiv,"btm")
+      exitdiv.addEventListener("click",exitgame);
+      displaydiv.appendChild(exitdiv);
+      return;
+    }
+    var gradenum=$('grade').innerHTML;
+    displaydiv.innerHTML+="得分："+gradenum+"<br>请输入玩家名:<br>";
+    var inputname=document.createElement('input');
+    inputname.className="inputname";
+    inputname.maxlength=10;
+    displaydiv.appendChild(inputname);
+    var restartdiv=document.createElement('div');
+    restartdiv.innerHTML="提交";
+    restartdiv.style.left=width/2+200+"px";
+    restartdiv.style.top=height/2-100+"px";
+    restartdiv.className="restart";
+    restartdiv.addEventListener("click",submitgrade);
+    displaydiv.appendChild(restartdiv);
+}
+function submitgrade(){
+  var gradenum=$('grade').innerHTML;
+  var playername=$$('inputname').value;
+  if(linkflag==false)
+    linkserver();
+  socket.emit('updategrade',{
+    playername:playername,
+    grade:gradenum
+  });
+  //socket.close();
+  gamerestart()
+}
+function gamerestart(){
+  var gamerlist=document.getElementsByClassName("gamerlist")[0];
+  gamerlist.innerHTML="";
+  if(onlinGameFlag==true){////////有问题
+    displayroom();
+    socket.removeListener("flashgame");
+  }
+  clearInterval(timer);
+  for(var r = 0; r < MAP_R; r++) {
+    map.push([]);
+    for(var c = 0; c < MAP_C; c++) {
+      map[r][c] = {};
+      map[r][c].b = 0;
+    }
+  }
+  var space = $('space');
+  for(var r = 0; r < MAP_R; r++) {
+      for(var c = 0; c < MAP_C; c++) {
+        var div = document.getElementById(r+'-'+c);
+        space.removeChild(div);
+      }
+  }
+  pause = false;
+  gstart=true;
+  init();
+  printGrade();
+  nextBlock();
+  drawBlock();
+  makeShadow();
+  drawShadow();
+  timer = setInterval(loop, gtime);
+  var displaydiv=document.getElementsByClassName('goinfo')[0];
+  var gameboxdiv=document.getElementsByClassName("gamebox")[0];
+  if(displaydiv){
+    gameboxdiv.removeChild(displaydiv);
+  }
+
+}
+function $(id) {////写引号
+  return document.getElementById(id);
+}
+/////////////////////////////////////////////////////自动化实现函数//////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////非游戏相关///////////////////////////////////////////////////////////////
+var musicvalue=30;
+var musicvalue_default=30;
+var MAx_musicvalue=100;
+var attribute=1;
+var attribute_default=1;
+var sevalue=20;
+var sevalue_deafault=10;
+
+var roomcheck=[false,false];
+var bgm=document.getElementById("BGM");
+var se=document.getElementById('SE');
+var sequeue=[];
+var queuehead=0;
+var queuetail=0;
+
+
+function playse(char){
+  var audio = document.createElement("audio");
+  audio.src = "bgm/music.mp3";
+  audio.volume=sevalue/MAx_musicvalue;
+  var time=600;
+  if(char=="move"){
+    audio.currentTime=2.9088;
+    time=600;
+  }
+  if(char=="fall"){
+    audio.currentTime=1.3;
+    time=500;
+  }
+  if(char=="clear"){
+    audio.currentTime=8.2;
+    time=900;
+  }
+  audio.play();
+  sequeue.push(audio);
+  queuetail++;
+  setTimeout(stopse,600);
+}
+function stopse(){
+  if(queuehead<queuetail){
+    var audio=sequeue[queuehead];
+    audio.pause();
+    queuehead++;
+  }
+  
+}
+function shift(classname){
+  document.getElementsByClassName("menu")[0].style.display="none";
+  document.getElementsByClassName(classname)[0].style.display="block";
+  if(classname=="option"){
+    var video=$('video');
+    var se=$('se');
+    var attr=document.getElementsByName('rank');
+    video.value=musicvalue;
+    se.defaultValue=0;//////////se音量未设置
+    for(var i=0;i<attr.length;i++){
+      if(attr[i].value==attribute_default)
+        attr[i].checked=true;
+    }
+  }
+  if(classname=="online"){
+    linkserver();
+    inputpname();
+    displayroom();
+  }
+  if(classname=="createroom"){
+    document.getElementsByClassName("online")[0].style.display="none";
+    document.getElementsByClassName(classname)[0].style.display="block";
+    var pwjudge=document.getElementsByName("rpwordjudge");
+    var roompword=document.getElementsByName("roompword");
+    if(pwjudge[1].checked=true){
+      roompword[0].disabled=true;
+    }
+  }
+  if(classname=="room"){
+     document.getElementsByClassName("createroom")[0].style.display="none";
+     document.getElementsByClassName("online")[0].style.display="none";
+  }
+  if(classname=="ranking"){
+    linkserver();
+    displayrank();
+  }
+}
+function exitshift(classname){
+  document.getElementsByClassName("menu")[0].style.display="block";
+  document.getElementsByClassName(classname)[0].style.display="none";
+  if(classname=='option'){
+    musicvalue_default=musicvalue;
+    attribute_default=attribute;
+  }
+  if(classname=="online"){
+    socket.close();
+    linkflag=false;
+    sleep(500);
+    var rlist=document.getElementsByClassName("roomlist")[0];
+    while(rlist.hasChildNodes()) //当elem下还存在子节点时 循环继续
+    {
+        rlist.removeChild(rlist.firstChild);
+    }
+  }
+  if(classname=="createroom"){
+    document.getElementsByClassName("menu")[0].style.display="none";
+    document.getElementsByClassName("online")[0].style.display="block";
+    document.getElementsByClassName(classname)[0].style.display="none";
+  }
+  if(classname=="room"){
+    document.getElementsByClassName("menu")[0].style.display="none";
+     document.getElementsByClassName("createroom")[0].style.display="none";
+     document.getElementsByClassName("online")[0].style.display="block";
+     document.getElementsByClassName("room")[0].style.display="none";
+     exitroom();
+  }
+  if(classname=="ranking"){
+    $$('reocrdlist').innerHTML="";
+    socket.close();
+    linkflag=false;
+  }
+}
+function changevolume(){//更改音量
+  musicvalue=$('video').value;
+  bgm.volume=musicvalue/MAx_musicvalue;
+}
+function changeSevolume(){//更改音量
+  sevalue=$('se').value;
+  se.volume=sevalue/MAx_musicvalue;
+  se.currentTime=2.9088;
+  se.play();
+  setimer=setTimeout(stopchangese,600);
+}
+function stopchangese(){
+  se.pause();
+}
+
+function changehard(value){//更改难度
+  attribute=value;
+}
+function inputpname(){
+    var stopdiv=document.createElement("div");
+    stopdiv.style.width=width+"px";
+    stopdiv.style.height=height+"px";
+    stopdiv.className="stop";
+    var displaydiv=document.createElement("div");
+    displaydiv.className="goinfo";
+    promptBox(displaydiv,"body");
+    displaydiv.innerHTML+="请输入玩家名:<br><br>";
+    var inputname=document.createElement('input');
+    inputname.className="inputname";
+    inputname.maxlength=10;
+    displaydiv.appendChild(inputname);
+    var restartdiv=document.createElement('div');
+    restartdiv.innerHTML="提交";
+    restartdiv.style.left=width/2+200+"px";
+    restartdiv.style.top=height/2-100+"px";
+    restartdiv.className="restart";
+    restartdiv.addEventListener("click",submitname);
+    displaydiv.appendChild(restartdiv);
+    stopdiv.appendChild(displaydiv);
+    document.body.appendChild(stopdiv);
+}
+function reduction(){////设置还原
+  musicvalue=musicvalue_default;
+  sevalue=sevalue_deafault;
+  attribute=attribute_default;
+  var video=$('video');
+  var se=$('se');
+  var attr=document.getElementsByName('rank');
+  video.value=musicvalue;
+  bgm.volume=musicvalue/MAx_musicvalue;
+  se.defaultValue=0;//////////se音量未设置
+  for(var i=0;i<attr.length;i++){
+    if(attr[i].value==attribute)
+      attr[i].checked=true;
+  }
+}
+function reduction2(){
+  document.getElementsByName("roomname")[0].value="";
+  document.getElementsByName("roomcount")[0].value="";
+  document.getElementsByName("roompword")[0].disabled=true;
+  document.getElementsByName("roompword")[0].value="";
+  document.getElementsByName("rpwordjudge")[1].checked=true;
+}
+function pwchecked(object){
+  if(object.value==0){
+    document.getElementsByName("roompword")[0].disabled=false;
+  }
+  else{
+    document.getElementsByName("roompword")[0].disabled=true;
+  }
+}
+function createroom(){
+  if(roomcheck[0]==false||roomcheck[1]==false)
+    return;
+  var roomname=document.getElementsByName("roomname")[0].value;
+  var roomcount=document.getElementsByName("roomcount")[0].value;
+  var roompword=document.getElementsByName("roompword")[0].value;
+  croom(roomname,roomcount,roompword);
+}
+function exitgame(){//退出游戏
+  debug.innerHTML+="退出游戏"
+document.getElementsByClassName("menu")[0].style.display="block";
+document.getElementsByClassName("box")[0].style.display="none";
+var gamerlist=document.getElementsByClassName("gamerlist")[0];
+while(gamerlist.hasChildNodes()) //当elem下还存在子节点时 循环继续
+{
+  gamerlist.removeChild(gamerlist.firstChild);
+}
+if(onlinGameFlag==true&&gstart==true){
+  console.log("gstart==true");
+  exitshift('room');
+  socket.removeListener("flashgame");
+}
+clearInterval(timer);
+for(var r = 0; r < MAP_R; r++) {
+  map.push([]);
+  for(var c = 0; c < MAP_C; c++) {
+    map[r][c] = {};
+    map[r][c].b = 0;
+  }
+}
+var space = $('space');
+for(var r = 0; r < MAP_R; r++) {
+    for(var c = 0; c < MAP_C; c++) {
+      var div = document.getElementById(r+'-'+c);
+      space.removeChild(div);
+    }
+}
+if(linkflag==true&&onlinGameFlag==false){
+  socket.close();
+  linkflag=false;
+}
+pause = false;
+gstart=false;
+onlinGameFlag=false;
+Grade=0;
+var gameboxdiv=document.getElementsByClassName("gamebox")[0];
+var displaydiv=document.getElementsByClassName("goinfo")[0];
+if(displaydiv)
+gameboxdiv.removeChild(displaydiv);
+}
+function displayrank(){
+  if(linkflag!=true){
+    setTimeout(displayrank,100);
+    return; 
+  }
+  socket.emit('needrank',null);
+  debug.innerHTML="已发needrank"+linkflag;
+  socket.on('rankinfo',function(data){
+    var rankinfo=data.rankinfo;
+    debug.innerHTML="已收到rankinfo";
+    for(var i=0;i<rankinfo.num;i++){
+      var gradename=data.rankinfo.data[i].playername;
+      var gradenum=data.rankinfo.data[i].grade;
+      var gnamediv=document.createElement('div');
+      var rankdiv=document.createElement('div');
+      var gradediv=document.createElement('div');
+      gnamediv.className="rankname";
+      rankdiv.className="ranknum";
+      gradediv.className="rankgrade";
+      var list=$$('reocrdlist');
+      var rankul=document.createElement('div');
+      gnamediv.innerHTML=gradename;
+      rankdiv.innerHTML=i+1;
+      gradediv.innerHTML=gradenum;
+      rankul.appendChild(rankdiv);
+      rankul.appendChild(gnamediv);
+      rankul.appendChild(gradediv);
+      list.appendChild(rankul);
+    }
+  });
+}
+function checkrname(obj){
+  if(obj.value==""){
+    $('roomnamedebug').innerHTML="房间名不能为空";
+    roomcheck[0]=false;
+  }
+  else{
+    $('roomnamedebug').innerHTML="";
+    roomcheck[0]=true;
+  }
+}
+function checknumber(obj){
+  if(isNaN(obj.value) ||obj.value==""){
+    obj.value="";
+    $('roominfodebug').innerHTML="人数必须为数字且不能为空";
+    roomcheck[1]=false;
+  }
+  else{
+    if(obj.value>12){
+      $('roominfodebug').innerHTML="人数超过上限";
+      obj.value="";
+      roomcheck[1]=false
+    }
+    else{
+      $('roominfodebug').innerHTML="";
+      roomcheck[1]=true;
+    }
+  }
+}
+function clickbtm(keyCode){
+    if(!gstart) return
+  if(keyCode == KEY_LEFT ||  keyCode == KEY_RIGHT) {
+    easeBlock();
+    if(enableShadow)//消除当前阴影
+      easeShadow();
+    if(keyCode == KEY_LEFT) {//左移
+      if(canLeft())
+        --currC;
+    } else if(keyCode == KEY_RIGHT) {//右移
+      if(canRight())
+        ++currC;
+    }
+    drawBlock();
+    if(enableShadow) {//显示移动后的阴影
+      makeShadow();
+      drawShadow();
+    }
+  } else if(keyCode == KEY_ROTATE) {
+    if(canRotate()) {//是否能旋转
+      easeBlock();
+      if(enableShadow)
+        easeShadow();
+      currDir = [1,2,3,0][currDir];//数组[1,2,3,0][当前方向]实现循环0123方向
+      drawBlock();
+      if(enableShadow) {
+        makeShadow();
+        drawShadow();
+      }
+    }
+  } else if(keyCode == KEY_ACCELERATE) {
+    loop();
+  } else if(keyCode == KEY_ONE_STOP) {
+    easeBlock();//清除方块
+    makeShadow();//重画阴影???
+    currR = shadow.r;
+    currC = shadow.c;
+    drawBlock();  //绘制方块
+  }
+}
+function sleep(delay) {
+    var start = (new Date()).getTime();
+    debug.innerHTML+=start+" #   ";
+    while((new Date()).getTime() - start < delay) {
+        continue;
+    }
+}
+////////////////////////////////////服务器相关函数///////////////////////////////////////////////////////////////////////////////////////////
+
+function linkserver(){
+  socket=io("ws://localhost:3000");
+  socket.on('conn',function(data){
+        if(data.false==false){
+          deubg.innerHTML+="连接出错";
+          return;
+        }
+        playerNumber=data.pnum;
+        debug.innerHTML+="连接成功"+playerNumber;
+        linkflag=true;
+        debug.innerHTML=linkflag;
+    });
+}
+function croom(roomname,roomcount,roompword){
+  socket.emit("croom",{
+      pnum:playerNumber,
+      pname:playerName,
+      roomname:roomname,
+      roomcount:roomcount,
+      roompword:roompword
+  });
+  debug.innerHTML+="已发送";
+  jroom();
+}
+function jroom(){//进入房间获取数据并显示
+  socket.on('jroom',function(data){
+    if(data!=null){
+      if(onlinGameFlag==true){
+        gstart=false;
+        exitgame();
+        socket.removeListener("ending");
+        var gameboxdiv=document.getElementsByClassName("gamebox")[0];
+        var goinfo=document.getElementsByClassName("goinfo")[0];
+        if(goinfo){
+          gameboxdiv.removeChild(goinfo);
+          debug.innerHTML="移除了goinfo";
+        }
+        
+        document.getElementsByClassName("menu")[0].style.display="none";
+        onlinGameFlag=false;
+      }
+      shift('room');
+      $('roomname').innerHTML=data.roomname;
+      roomnumber=data.roomnumber;
+      players=data.players;
+      $('playerslist').innerHTML="";
+      for(var i=0;i<players.length;i++){
+        var playerdiv=document.createElement('div');
+        playerdiv.className="playersul";
+        var playername=document.createElement('div');
+        playername.className="playername";
+        playername.innerHTML="玩家："+players[i].playerName;
+        var playerready=document.createElement('div');
+        playerready.className="playerready";
+        if(players[i].ready==true){
+          playerready.innerHTML="已准备";
+        }
+        else{
+          playerready.innerHTML="未准备";
+        }
+        //playerdiv.innerHTML="玩家："+players[i].playerNumber+"  是否准备："+players[i].ready;
+        playerdiv.appendChild(playername);
+        playerdiv.appendChild(playerready);
+        $('playerslist').appendChild(playerdiv);
+      }
+      debug.innerHTML+="room:"+data.roomnumber+"用户号"+playerNumber;
+    }
+    else{
+      alert("房间已满无法加入");
+    }
+    
+  });
+}
+function returnroom(){
+  jroom();
+  socket.emit('returnroom');
+}
+function enterroom(){
+
+  roomnumber=document.getElementsByName("eroomnum")[0].value;
+  debug.innerHTML+=roomnumber;
+  if(roomnumber==null)
+    return;
+  socket.emit("eroom",{
+    pnum:playerNumber,
+    pname:playerName,
+    roomnumber:roomnumber
+  });
+  debug.innerHTML="正在加入";
+  jroom();
+}
+function displayroom(){//显示房间列表
+  var rlist=document.getElementsByClassName("roomlist")[0];
+  socket.on("roomlist",function(data){
+    rlist.innerHTML="";
+    rooms=data.rooms;
+    if(rooms.length==0){
+      var div=document.createElement("div");
+      div.innerHTML="暂无房间";
+      div.className="roomul roomborder2";
+      rlist.appendChild(div);
+      return;
+    }
+    for(var i=0;i<rooms.length;i++){
+      var div=document.createElement('div');
+      div.className="roomul roomborder2";
+      
+      var div1=document.createElement('div');
+      div1.className="roomnumber";///房间号
+      div1.innerHTML=rooms[i].roomnumber;
+      div.appendChild(div1);
+      var div1=document.createElement('div');
+      div1.className="roomulname";///房间名
+      div1.innerHTML=rooms[i].roomname;
+      div.appendChild(div1);
+       var div1=document.createElement('div');
+      div1.className="roomcount";//房间人数
+      div1.innerHTML=rooms[i].players.length+"/"+rooms[i].roomcount
+      div.appendChild(div1);
+       var div1=document.createElement('div');
+      div1.className="roomflag";
+      div1.innerHTML=rooms[i].flag;
+      div.appendChild(div1);
+
+      rlist.appendChild(div);
+      
+      div.addEventListener("mouseover",mycoloron(div));
+      div.addEventListener("mouseout",mycoloroff(div));
+      if(rooms[i].roomcount==rooms[i].players.length){
+        div.addEventListener("click",roomfull);
+      }
+      else{
+        div.addEventListener("click",myenterroom(rooms[i].roomnumber));
+      }
+    }
+  });
+}
+var roomfullkey=false;
+function roomfull(){
+  if(roomfullkey==true){
+    return;
+  }
+  roomfullkey=true;
+  var roomfulldiv=document.createElement('div');
+  promptBox(roomfulldiv,"body");
+  roomfulldiv.innerHTML="房间已满无法加入<br><br><br>";
+  var rfullbtm=document.createElement("div");
+  promptBox(rfullbtm,"btm");
+  rfullbtm.innerHTML="确定";
+  roomfulldiv.appendChild(rfullbtm);
+  roomfulldiv.addEventListener("click",roomfullclear);
+  document.body.appendChild(roomfulldiv);
+}
+function roomfullclear(){
+  roomfullkey=false;
+  var roomfulldiv=document.getElementsByClassName("goinfo")[0];
+  document.body.removeChild(roomfulldiv);
+}
+function flashroom(){
+  socket.removeListener('roomlist');
+  socket.emit('flashroom');
+  displayroom()
+}
+function readygame(){
+    socket.emit('readygame',{
+      playerNumber:playerNumber,
+      roomnumber:roomnumber
+    });
+    var readybtm=document.getElementsByClassName('readybtm')[0];
+    readybtm.innerHTML="取消准备";
+    readybtm.onclick="";
+    readybtm.removeEventListener("click",readygame);
+    readybtm.addEventListener("click",unreadygame);
+    socket.on('gamestart',function(data){
+      roominfo=data.room;
+      onlinGameFlag=true;
+      document.getElementsByClassName('room')[0].style.display="none";
+      gamestart();
+    });
+}
+function unreadygame(){
+    socket.removeListener('gamestart');
+    socket.emit('unreadygame',{
+      playerNumber:playerNumber,
+      roomnumber:roomnumber
+    });
+    var readybtm=document.getElementsByClassName('readybtm')[0];
+    readybtm.innerHTML="准备游戏";
+    readybtm.removeEventListener("click",unreadygame);
+    readybtm.addEventListener("click",readygame);
+}
+function myenterroom(rnumber){///通过回调函数的方式将参数传入
+  return function(){
+    document.getElementsByName("eroomnum")[0].value=rnumber;
+    enterroom();
+  }
+}
+function mycoloron(obj){//通过事件方式更改颜色
+  return function(){
+    mon(obj);
+  }
+}
+function mycoloroff(obj){//通过事件方式更改颜色
+  return function(){
+    moff(obj);
+  }
+}
+function myselectgamer(obj){
+  return function(){
+    if(selectedgamer){
+      selectedgamer.style.border="";
+    }
+    obj.style.border="3px yellow solid";
+    selectedgamer=obj;
+  }
+}
+function exitroom(){
+  debug.innerHTML="退出房间"+roomnumber;
+  document.getElementsByClassName('readybtm')[0].onclick="readygame()";
+  socket.emit('exitroom',{
+    roomnumber:roomnumber,
+    playerNumber:playerNumber
+  });
+  socket.removeListener('jroom');
+  $('playerslist').innerHTML="";
+  socket.removeListener('roomlist');
+  socket.removeListener('gamestart');
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////联机相关游戏函数
+function gamerboxini(){
+  var gamerlist=document.getElementsByClassName("gamerlist")[0];
+  var rNum=randInt(0,roominfo.players.length);
+  $('atkdebug').innerHTML="0 "+rNum;
+  debug.innerHTML=rNum;
+  var thisnum;
+  for(var i=0;i<roominfo.players.length;i++){
+    if(roominfo.players[i].playerNumber==playerNumber){
+      thisnum=i;
+      break;
+    }
+  }
+  while(rNum==thisnum){
+    rNum=randInt(0,roominfo.players.length);
+    $('atkdebug').innerHTML=rNum;
+    }
+  for(var i=0;i<roominfo.players.length;i++){
+    if(roominfo.players[i].playerNumber==playerNumber){
+      thisnum=i;
+      continue;
+    }
+    var gamer=document.createElement("div");
+    gamer.className="gamer";
+    var gamernum=document.createElement("div");
+    gamernum.className="gamernum";
+    gamernum.style.display="none";
+    gamernum.innerHTML="玩家"+roominfo.players[i].playerNumber
+    var gamername=document.createElement("div");
+    gamername.className="gamername";
+    gamername.innerHTML=roominfo.players[i].playerName;
+    var gamerdiv=document.createElement("div");
+    gamerdiv.className="gamermap";
+    var gsize=8;
+    gamerdiv.style.position = 'relative';
+    gamerdiv.style.width = gsize * MAP_C +MAP_C + 'px';
+    gamerdiv.style.height = gsize * MAP_R +MAP_R+ 'px';
+    gamer.style.border = '1px solid black';
+    for(var r = 0; r < MAP_R; r++) {
+      for(var c = 0; c < MAP_C; c++) {
+        var div = document.createElement('div');
+        div.id = "gamer"+roominfo.players[i].playerNumber+r + '-' + c;
+        div.style.background="#EEE"
+        div.style.position = 'absolute';
+        div.style.top = gsize * r  +r+ 'px';
+        div.style.left = gsize * c  +c + 'px';
+        div.style.width = gsize + 'px';
+        div.style.height = gsize + 'px';
+        gamerdiv.appendChild(div);
+      }
+    }
+    if(i==rNum){
+      $('atkdebug').innerHTML+="i=rNum";
+      selectedgamer=gamer;
+      selectedgamer.style.border="3px yellow solid";
+    }
+    gamer.style.height=parseInt(gamerdiv.style.height.split("px")[0])+parseInt(gamernum.style.height.split("px")[0])+1+"px";
+    gamer.appendChild(gamernum);
+    gamer.appendChild(gamername);
+    gamer.appendChild(gamerdiv);
+    gamer.addEventListener("click",myselectgamer(gamer));
+    gamerlist.appendChild(gamer);
+  }
+
+}
+function attackgamer(num){
+  if(selectedgamer!=null)
+  var selectnum=selectedgamer.getElementsByClassName("gamernum")[0].innerHTML.split("玩家")[1];
+else return
+  debug.innerHTML=selectnum;
+  socket.emit("atk",{//目标号，当前号，攻击值
+    aimnumber:selectnum,
+    thisnumber:playerNumber,
+    atknum:num
+  });
+}
+function submitname(){
+  var name=document.getElementsByClassName("inputname")[0].value;
+  console.log(name);
+  playerName=name;
+  socket.emit('addname',{
+    playerNumber:playerNumber,
+    playerName:name
+  });
+  var gdiv=$$("stop");
+  document.body.removeChild(gdiv);
+}
+function gamerboxdisplay(){
+  for(var i=0;i<roominfo.players.length;i++){
+    if(roominfo.players[i].playerNumber==playerNumber){
+      $('killnum').innerHTML=roominfo.players[i].kill;
+      continue;
+    }
+    var gamermap=roominfo.players[i].playerMap;
+    if(gamermap==null){
+          //debug.innerHTML+="空";
+      continue;
+    }
+    if(roominfo.players[i].live==false){
+      for(var r = 0; r < MAP_R; r++){
+        for(var c = 0; c < MAP_C; c++) {
+          var div = $("gamer"+roominfo.players[i].playerNumber+r + '-' + c);
+          if(gamermap[r][c].b) {
+            div.style.background = "#555";
+          } else{
+            div.style.backgroundColor = 'transparent';
+          }
+        }
+      }
+      continue;
+    }
+    for(var r = 0; r < MAP_R; r++){
+      for(var c = 0; c < MAP_C; c++) {
+        var div = $("gamer"+roominfo.players[i].playerNumber+r + '-' + c);
+        if(gamermap[r][c].b) {/////////////////////////////////////////////////////////有BUG未查明
+          div.style.backgroundColor = colors[gamermap[r][c].c];
+        } else{
+          div.style.backgroundColor = 'transparent';
+        }
+      }
+    }
+  }
+}
+function promptBox(obj,type){
+  if(type=="body"){
+    obj.style.top=height/5+"px";
+    obj.style.left=width*0.3+"px";
+    obj.className="goinfo";
+  }
+  else if(type=="btm"){
+    obj.style.left=width/2-100+"px";
+    obj.style.top=height/2-50+"px";
+    obj.className="restart";
+  }
+
+} 
+function getheight(char){
+  var olength=parseInt(getStyle(document.getElementsByClassName(char)[0],"height").split('px')[0]);
+    return olength
+}
+function getwidth(char){
+  var owidth=parseInt(getStyle(document.getElementsByClassName(char)[0],"width").split('px')[0]);
+    return owidth
+}
+</script>
+<script type="text/javascript" src="autochange.js"></script>
+</html>
