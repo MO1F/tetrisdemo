@@ -755,7 +755,9 @@ function easeatktips(){
 }
 
 function speedchange(){
-  atkdebug.innerHTML+=gtime;
+  if(onlinGameFlag==true){
+    return;
+  }
   if(gtime<=150){
     return;
   }
