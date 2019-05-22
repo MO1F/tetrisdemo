@@ -1,0 +1,582 @@
+body{
+	background-color: #407afc;
+	margin:0 0;
+	padding: 0px;
+
+
+}
+.center{
+	margin:auto;overflow-y:hidden;
+}
+.left{
+	float: left;
+}
+.right{
+	float: right;
+}
+.c32b16c{
+	background: url(../img/block1.png) no-repeat;
+    background-size:100% 100%;  
+    width: 30px;
+    height: 30px;
+}
+.cec6100{
+	background: url(../img/block2.png) no-repeat;
+    background-size:100% 100%;  
+    width: 30px;
+    height: 30px;
+}
+.c00a1e9{
+	background: url(../img/block3.png) no-repeat;
+    background-size:100% 100%;  
+    width: 30px;
+    height: 30px;
+}
+.ceb68a3{
+	background: url(../img/block4.png) no-repeat;
+    background-size:100% 100%;  
+    width: 30px;
+    height: 30px;
+
+}
+.cfff100{
+	background: url(../img/block5.png) no-repeat;
+    background-size:100% 100%;  
+    width: 30px;
+    height: 30px;
+}
+.ce5004f{
+	background: url(../img/block6.png) no-repeat;
+    background-size:100% 100%;  
+    width: 30px;
+    height: 30px;
+}
+.c7ecef4{
+	background: url(../img/block7.png) no-repeat;
+    background-size:100% 100%;  
+    width: 30px;
+    height: 30px;
+}
+.c555{
+	background: url(../img/block8.png) no-repeat;
+    background-size:100% 100%;  
+}
+.menubox{
+	margin:0 auto;
+	margin-top: 50px;
+	width:200px;
+}
+.menubox a{
+	text-decoration:none;
+	text-align:center;
+	color:#407afc;
+	display: block;
+	font-size: 23px;
+	line-height: 50px;
+	width: 200px;
+	height: 50px;
+	margin-top: 20px;
+	background:#FFF ;
+	cursor: pointer;
+	border-radius:2px;
+	box-shadow:0 10px 50px 0 rgba(0,20,180,.1);
+}
+.menubox a:hover{
+	color:#FFF;
+	background:#364261;
+}
+.gtitle{
+	text-align:center;
+	margin: 30px auto;
+	font-size: 50px;
+	color: #FFF;
+}
+.online,.option,.ranking{
+	display: none;
+	background: #334;
+}
+.online{
+	background:#f8faff;
+}
+.ranking{
+	width: 100%;
+	height: 100%;
+	background: #FFF;
+}
+.recordbox{
+	min-width: 200px;
+	min-height: 300px;
+	margin:10px auto;
+	background: #FFF;
+}
+.recordhead div{
+	font-size: 20px;
+	line-height: 30px;
+	height: 30px;
+	background: yellow;
+	text-align: center;
+	border-top: 1px solid;
+}
+.ranknum{
+	float: left;
+	min-width: 19%;
+	border-left:1px solid;
+	border-right:1px solid;
+	border-bottom:1px solid;
+}
+.rankname{
+	float: left;
+	min-width: 40%;
+	border-bottom:1px solid;
+	border-right: 1px solid;
+}
+.rankgrade{
+	float: left;
+	min-width: 40%;
+	border-right:1px solid;
+	border-bottom :1px solid;
+}
+.reocrdlist div div{
+	font-size: 20px;
+	line-height: 30px;
+	height: 30px;
+	background: #EEE;
+	text-align: center;
+}
+.title{
+	font-size: 30px;
+	height: 40px;
+	text-align: center;
+	background: #3a80e2;
+	color:#fff;
+	box-shadow:0 10px 50px 0 rgba(0,20,180,.1);
+
+}
+.roomlist{
+	background:#FFF;
+	height: 250px;
+	font-size: 16px;
+}
+.obottom{
+	width: 100%;
+	height: 130px;
+	border-top: 1px solid #e7e7e7;
+}
+.oleft{
+	margin-top: 20px;
+	float: left;
+}
+.oright{
+	margin-top: 20px;
+	float: right;
+}
+.croombox{
+	background: #FFF;
+	height: 400px;
+	margin:0px;
+	padding: 0px;
+}
+.roominfo{
+	height: 60px;
+	width: 500px;
+	font-size: 20px;
+	line-height: 60px;
+	margin: 0px auto;
+}
+.roomcode{
+	width: 500px;
+	height: 120px;
+	margin: 10px auto;
+	font-size: 20px;
+	line-height:60px;
+}
+.btmbox{
+	width: 500px;
+	height: 50px;
+	margin: 20px auto;
+}
+.btm{
+	float: left;
+	background: #364261;
+	width: 200px;
+	height: 50px;
+	margin-left: 30px;
+	font-size: 20px;
+	text-align: center;
+	line-height: 50px;
+	cursor: pointer;
+	border-radius:2px;
+	box-shadow:0 10px 50px 0 rgba(0,20,180,.1);
+}
+.rinput{
+	width: 150px;
+	height: 30px;
+	line-height: 30px;
+	font-size: 20px;
+}
+.croom{
+	width: 180px;
+	height: 50px;
+	font-size: 25px;
+	color: white;
+	background: #123;
+	text-align: center;
+	line-height: 50px;
+	margin-left: 25px;
+	cursor: pointer;
+}
+.enterroom{
+	margin-left: 0px !important;
+}
+.einput{
+	width: 200px;
+	height: 48px;
+    line-height: 48px;
+    font-size: 25px;
+    border-left:1px solid #e7e7e7;
+    border-top:1px solid #e7e7e7;
+    border-bottom:1px solid #e7e7e7;
+}
+#roomname{
+	font-size: 30px;
+	height: 40px;
+	text-align: center;
+	background: #3a80e2;
+	color:#fff;
+	box-shadow:0 10px 50px 0 rgba(0,20,180,.1);
+}
+.playersul{
+	float: left;
+	background: #FFF;
+	height: 80px;
+	width: 180px;
+	font-size: 20px;
+	line-height: 30px;
+	border: 1px solid #e7e7e7;
+	margin-left: 10px;
+	margin-top: 10px;
+	border-radius:2px;
+	box-shadow:0 10px 50px 0 rgba(0,20,180,.1);
+}
+.playername{
+	text-align: center;
+	font-size: 22px;
+}
+.playerready{
+	text-align: center;
+}
+.goinfo{
+	position: fixed;
+	width: 40%;
+	min-height: 200px;
+	font-size: 24px;
+	text-align: center;
+	background: white;
+	border:2px black solid;
+	z-index: 100;
+}
+.pinfo{
+	width: 90%;
+	font-size: 20px;
+	margin:0px auto;
+	font-style: "黑体";
+}
+.restart{
+	margin:10px auto;
+	width: 200px;
+	color: white;
+	background: #364261;
+	height: 50px;
+	font-size: 24px;
+	text-align: center;
+	line-height: 50px;
+	cursor: pointer;
+	border:1px black solid;
+	border-radius:2px;
+	box-shadow:0 10px 50px 0 rgba(0,20,180,.1);
+}
+.readybtmbox{
+	padding-top: 10px;
+	width: 100%;
+	height: 100px;
+	background: #f8faff;
+	border-top:1px solid #e7e7e7; 
+}
+.readybtm{
+	background: #DDF;
+	float: left;
+	width: 300px;
+	height:30px;
+	color: red;
+	font-size: 25px;
+}
+.btm{
+	width: 180px;
+	height: 50px;
+	font-size: 25px;
+	color: white;
+	background: #364261;
+	text-align: center;
+	line-height: 50px;
+	margin-left: 25px;
+	cursor: pointer;
+}
+.roomlisthead{
+	height: 35px;
+	background: #FFF;
+	line-height: 35px;
+}
+.roomborder{
+	border-top:2px solid; 
+	border-bottom:2px solid; 
+}
+.roomborder2{
+	border-bottom:1px solid; 
+	background:#EDE;
+}
+.roomul{
+	background: #f8faff;
+	height: 30px;
+	line-height: 30px;
+	cursor: pointer;
+}
+.roomulname{
+	float: left;
+	width: 50%;
+	height: 100%;
+	border-right:1px solid; 
+}
+.roomnumber{
+	float: left;
+	width: 8%;
+	height: 100%;
+	border-right:1px solid; 
+}
+.roomcount{
+	float: left;
+	width: 30%;
+	height: 100%;
+	border-right:1px solid; 
+}
+.roomflag{
+	float: left;
+	width: 11.1%;	
+	height: 100%;
+}
+.gamebox{
+	width: 261px;
+	height: 521px;
+	background-color: white;
+	float: left;
+}
+.atktips{
+	float: left;
+	background: white;
+	width: 35px;
+	height: 100%;
+}
+.gamerlist{
+	background: #0FD;
+	width: 95%;
+	margin: auto;
+	margin-top:40px;
+}
+.stop{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+.gamername{
+	text-align: center;
+	font-size: 18px;
+	color:#d9d9d9;
+}
+.gamermap{
+	background: white;
+	border: 1px solid black;
+}
+.gamer{
+	width: 92px;
+	margin: 10px 5px;
+	background: #EAF;
+	float:left;
+}
+#playerslist{
+	background: #FFF;
+	height: 400px;
+}
+.exit{
+	float: left;
+	background: #EEE;
+	width: 40px;
+	height: 40px;
+	font-size: 30px;
+	text-align: center;
+	line-height:40px;
+	cursor: pointer;
+}
+.block{
+	width:25px;
+	height: 25px;
+	background-color: #EEE;
+	margin-left: 1px;
+	margin-top: 1px;
+	float: left;
+}
+.leftbox{
+	float: left;
+	width: 200px;
+	height: 100%;
+	position: relative;
+	left: 0px;
+	background-color: #407afc;
+}
+.rightbox{
+	float: left;
+	width: 200px;
+	height: 100%;
+	background-color:  #407afc;
+}
+.gbtmbox{
+	width: 100%;
+	background: #771;
+	
+}
+.r1{
+	width: 100%;
+	height: 50px;
+}
+.r1 div{
+	float: left;
+	margin-right: 5px;
+	font-size: 20px;
+	font-family: '微软雅黑','黑体','宋体';
+	font-weight: bolder;
+	line-height: 50px;
+	color:#115;
+}
+.inputname{
+	height: 30px;
+	line-height: 30px;
+	font-size: 20px;
+}
+.box{
+	background-color:  #407afc;
+	width: 1000px;
+	height: 560px;
+	display: none;
+	position: relative;
+}
+.r2{
+	width: 100%;
+	height:180px;
+	background:  #407afc;
+	padding-top: 10px;
+}
+.r2 div{
+	float: left;
+	margin-right: 5px;
+}
+.opbox{
+	width:100%;
+	height: 200px;
+	background: white;
+}
+.opcenter{
+	width: 500px;
+	height: 200px;
+	margin: 0px auto;
+	padding-top: 20px;
+	padding-left:150px;
+}
+.btmcenter{
+	margin: 0px auto;
+	width: 500px;
+}
+.attribute{
+	height: 50px;
+	font-size: 25px;
+}
+.range{
+	width: 200px;
+}
+.vbuttombox{
+	width: 200px;
+	height: 100px;
+	position: absolute;
+	top: 300px;
+	left: 800px;
+}
+.vButtom{
+	position: absolute;
+	width: 50px;
+	height: 50px;
+	
+}
+.vSpace{
+	position: absolute;
+	width: 100px;
+	height: 50px;
+}
+.upSPace{
+	background: url(../img/spaceup.png) no-repeat;
+	background-size:100% 100%;  
+}
+.upSPace:active{
+	background: url(../img/spacedown.png) no-repeat;
+	background-size:100% 100%;  
+}
+.rightButtom{
+	background: url(../img/buttomup.png) no-repeat;
+	background-size:100% 100%;  
+    
+}
+.rightButtom:active{
+	background: url(../img/buttomdown.png) no-repeat;
+	background-size:100% 100%;  
+}
+.leftButtom{
+	background: url(../img/buttomup.png) no-repeat;
+	transform:rotate(180deg);
+	background-size:100% 100%;  
+    
+}
+.leftButtom:active{
+	background: url(../img/buttomdown.png) no-repeat;
+	background-size:100% 100%;  
+}
+.upButtom{
+	background: url(../img/buttomup.png) no-repeat;
+	transform:rotate(-90deg);
+	background-size:100% 100%;  
+    
+}
+.upButtom:active{
+	background: url(../img/buttomdown.png) no-repeat;
+	background-size:100% 100%;  
+}
+.downButtom{
+	background: url(../img/buttomup.png) no-repeat;
+	transform:rotate(90deg);
+	background-size:100% 100%;  
+    
+}
+.downButtom:active{
+	background: url(../img/buttomdown.png) no-repeat;
+	background-size:100% 100%;  
+}
+.nextText{
+	font-size: 20px;
+	font-family: '微软雅黑','黑体','宋体';
+	line-height: 50px;
+	font-weight: bolder;
+}
+#nextBlocks{
+	margin-top: 20px;
+	background: white;
+}
+#atkdebug{
+	position: absolute;
+	top: 250px;
+	left: 900px;
+}
