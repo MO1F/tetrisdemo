@@ -8,6 +8,7 @@ function autochangetimer(){
         res = setTimeout(autochange,300);
 }
 function autochange(){
+	debug.innerHTML="高："+height+"  宽"+width;
 	if(phoneflag==false){
 		phoneflag=check();
 		return;
