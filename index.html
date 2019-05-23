@@ -2,13 +2,13 @@
 <html>
 <head>
   <meta name="charset-8"/>
-  <title> new document </title>
+  <title>联机俄罗斯方块游戏online tetris</title>
   <link rel="stylesheet" type="text/css" href="css/style.css">
-  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 </head>
 
 <body  onresize="autochangetimer()">
-  <audio id="BGM" src="bgm/Korobeiniki.mp3" loop="loop" controls="controls" style="display: none"> autoplay="autoplay"</audio>
+  <audio id="BGM" src="bgm/Korobeiniki.mp3" loop="loop" controls="controls"  autoplay="autoplay" style="display: none"></audio>
   <audio id="SE" src="bgm/music.mp3" controls="controls" style="display: none"></audio>
   
   <div class="menu">
@@ -78,7 +78,7 @@
       <div class="attribute">难度：<input name="rank" type="radio" value="1" onclick="changehard(this.value)" />简单
                               <input name="rank" type="radio" value="2" onclick="changehard(this.value)" />普通</div>
     </div>
-    <div class="btmcenter">
+    <div class="btmbox">
       <div class="button btm" onclick="exitshift('option')" onmouseover="mon(this)" onmouseout="moff(this)">返回</div>
       <div class="button btm" onclick="reduction()" onmouseover="mon(this)" onmouseout="moff(this)">还原</div> 
     </div>
@@ -700,8 +700,8 @@ function sleep(delay) {
 }
 ////////////////////////////////////服务器相关函数///////////////////////////////////////////////////////////////////////////////////////////
 
-function linkserver(){
-  socket=io("ws://localhost:3000");////207.148.13.235:3001
+function linkserver(){//localhost:3000
+  socket=io("ws://207.148.13.235:3001");////207.148.13.235:3001
   socket.on('conn',function(data){
         if(data.false==false){
           deubg.innerHTML+="连接出错";
