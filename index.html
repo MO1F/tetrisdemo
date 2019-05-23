@@ -126,14 +126,14 @@
      <div id="atkdebug" ></div>
 </div>
  
-  <div id="debug" style="display: none"></div>
+  <div id="debug" ></div>
 </body>
 <script src="https://cdn.bootcss.com/socket.io/2.2.0/socket.io.js"></script>
 <script type="text/javascript" src="change.js"></script>
 <script type="text/javascript" src="tetris.js"></script>
 
 <script>
-//定义游戏开始标识style="display: none;"
+//定义游戏开始标识style="display: none;" style="display: none"
 var gstart=false;
 var phoneflag=true;
 /*——————————————————————————————————————————————联机游戏相关定义参数————————————————————————————————————————————————————————*/
@@ -443,12 +443,14 @@ function exitshift(classname){
   if(classname=="online"){
     socket.close();
     linkflag=false;
-    sleep(500);
+    sleep(400);
     var rlist=document.getElementsByClassName("roomlist")[0];
     while(rlist.hasChildNodes()) //当elem下还存在子节点时 循环继续
     {
         rlist.removeChild(rlist.firstChild);
     }
+    var stopdiv=document.getElementsByClassName("stop")[0];
+    document.body.removeChild(stopdiv);
   }
   if(classname=="createroom"){
     document.getElementsByClassName("menu")[0].style.display="none";
@@ -489,7 +491,7 @@ function changehard(value){//更改难度
 function inputpname(){
     var stopdiv=document.createElement("div");
     stopdiv.style.width=width+"px";
-    stopdiv.style.height=height+"px";
+    stopdiv.style.height=height-40+"px";
     stopdiv.className="stop";
     var displaydiv=document.createElement("div");
     displaydiv.className="goinfo";
@@ -754,9 +756,13 @@ function jroom(){//进入房间获取数据并显示
         playerready.className="playerready";
         if(players[i].ready==true){
           playerready.innerHTML="已准备";
+          playerdiv.style.background="#364261";
+          playerdiv.style.color="#FFF";
         }
         else{
           playerready.innerHTML="未准备";
+          playerdiv.style.background="#FFF";
+          playerdiv.style.color="";
         }
         //playerdiv.innerHTML="玩家："+players[i].playerNumber+"  是否准备："+players[i].ready;
         playerdiv.appendChild(playername);

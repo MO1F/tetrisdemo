@@ -23,6 +23,9 @@ function autochange(){
   width=document.documentElement.clientWidth;
   height=document.documentElement.clientHeight;
   detectOrient1();
+  //body
+  document.body.style.height=height-30+"px";
+  //roomlist
   var boheight=getheight('obottom');
   var theight=getheight('title');
   var roomlheight=39;
