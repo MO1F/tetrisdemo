@@ -50,11 +50,11 @@
   <div class="exit"onclick="exitshift('createroom')" onmouseover="mon(this)" onmouseout="moff(this)"><</div>
   <div class="title">创建房间</div>
   <div class="croombox">
-  <div class="roominfo">房 间 名 ：<input class="rinput" type="text" name="roomname" maxlength="16"onblur="checkrname(this)"><span id="roomnamedebug"></span></div>
+  <div class="roominfo">房 间 名 ：<input class="rinput" type="text" name="roomname" maxlength="16"onblur="checkrname(this)" autofocus="autofocus"><span id="roomnamedebug"></span></div>
   <div class="roominfo">房间人数：<input class="rinput" type="text" name="roomcount" onblur="checknumber(this)"><span id="roominfodebug"></span></div>
   <div class="roomcode">房间密码：有<input type="radio" name="rpwordjudge" value="0" onclick="pwchecked(this)">
                                  无<input type="radio" name="rpwordjudge" value="1" checked="true" onclick="pwchecked(this)"><br>
-    密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:&nbsp;&nbsp;<input class="rinput" type="text" name="roompword" maxlength="10"></div>
+    密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码:&nbsp;&nbsp;<input class="rinput" type="text" name="roompword" maxlength="10" ></div>
   <div class="btmbox"><div class="btm" onclick="createroom()" onmouseover="mon(this)" onmouseout="moff(this)">确认</div>
   <div onclick="reduction2()" class="btm" onmouseover="mon(this)" onmouseout="moff(this)">重置</div></div>
   </div>
@@ -103,6 +103,7 @@
   <div class="leftbox"> 
     <div class="exit"  onclick="exitgame()" onmouseover="mon(this)" onmouseout="moff(this)"><</div>
   <div class="gamerlist">
+    <div class="gamername" style="display: none">1</div>
   </div>
   
 </div>
@@ -123,17 +124,17 @@
     <div class="downButtom vButtom" onclick="clickbtm(KEY_ACCELERATE)"></div>
     <div class="rightButtom vButtom" onclick="clickbtm(KEY_RIGHT)"></div>
   </div>
-     <div id="atkdebug" ></div>
+     <div id="atkdebug" style="display: none;" ></div>
 </div>
  
-  <div id="debug" ></div>
+  <div id="debug" style="display: none"></div>
 </body>
 <script src="https://cdn.bootcss.com/socket.io/2.2.0/socket.io.js"></script>
 <script type="text/javascript" src="change.js"></script>
 <script type="text/javascript" src="tetris.js"></script>
 
 <script>
-//定义游戏开始标识style="display: none;" style="display: none"
+//定义游戏开始标识
 var gstart=false;
 var phoneflag=true;
 /*——————————————————————————————————————————————联机游戏相关定义参数————————————————————————————————————————————————————————*/
@@ -148,6 +149,8 @@ var roominfo;
 var debug=$('debug');
 var width=document.documentElement.clientWidth;
 var height=document.documentElement.clientHeight;
+var gsize=8//玩家地图格子大小
+var rNum//随机选取的玩家
 /*—————————————————————————————————————————————联机游戏相关定义参数结束—————————————————————————————————————————————————————*/
 var selectedgamer;
 
@@ -284,7 +287,8 @@ function gameOverDisplay(){
     displaydiv.innerHTML+="得分："+gradenum+"<br>请输入玩家名:<br>";
     var inputname=document.createElement('input');
     inputname.className="inputname";
-    inputname.maxlength=10;
+    inputname.maxLength=10;
+    inputname.autofocus="autofocus";
     displaydiv.appendChild(inputname);
     var restartdiv=document.createElement('div');
     restartdiv.innerHTML="提交";
@@ -420,6 +424,7 @@ function shift(classname){
     document.getElementsByClassName(classname)[0].style.display="block";
     var pwjudge=document.getElementsByName("rpwordjudge");
     var roompword=document.getElementsByName("roompword");
+    $$('rinput').autofocus="autofocus";
     if(pwjudge[1].checked=true){
       roompword[0].disabled=true;
     }
@@ -499,7 +504,8 @@ function inputpname(){
     displaydiv.innerHTML+="请输入玩家名:<br><br>";
     var inputname=document.createElement('input');
     inputname.className="inputname";
-    inputname.maxlength=10;
+    inputname.maxLength=10;
+    inputname.autofocus="autofocus";
     displaydiv.appendChild(inputname);
     var restartdiv=document.createElement('div');
     restartdiv.innerHTML="提交";
@@ -510,6 +516,7 @@ function inputpname(){
     displaydiv.appendChild(restartdiv);
     stopdiv.appendChild(displaydiv);
     document.body.appendChild(stopdiv);
+
 }
 function reduction(){////设置还原
   musicvalue=musicvalue_default;
@@ -935,8 +942,10 @@ function exitroom(){
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////联机相关游戏函数
 function gamerboxini(){
   var gamerlist=document.getElementsByClassName("gamerlist")[0];
-  var rNum=randInt(0,roominfo.players.length);
-  $('atkdebug').innerHTML="0 "+rNum;
+  gamerlist.innerHTML="";
+  if(rNum==null)
+     rNum=randInt(0,roominfo.players.length);
+  //$('atkdebug').innerHTML="0 "+rNum;
   debug.innerHTML=rNum;
   var thisnum;
   for(var i=0;i<roominfo.players.length;i++){
@@ -946,8 +955,9 @@ function gamerboxini(){
     }
   }
   while(rNum==thisnum){
+
     rNum=randInt(0,roominfo.players.length);
-    $('atkdebug').innerHTML=rNum;
+    //$('atkdebug').innerHTML=rNum;
     }
   for(var i=0;i<roominfo.players.length;i++){
     if(roominfo.players[i].playerNumber==playerNumber){
@@ -956,20 +966,22 @@ function gamerboxini(){
     }
     var gamer=document.createElement("div");
     gamer.className="gamer";
+
     var gamernum=document.createElement("div");
     gamernum.className="gamernum";
     gamernum.style.display="none";
-    gamernum.innerHTML="玩家"+roominfo.players[i].playerNumber
+    gamernum.innerHTML=roominfo.players[i].playerNumber
     var gamername=document.createElement("div");
     gamername.className="gamername";
     gamername.innerHTML=roominfo.players[i].playerName;
+    gamer.style.width=gsize * MAP_C +MAP_C+"px";
+    gamer.style.height=gsize * MAP_R +MAP_R+24+ 'px';
     var gamerdiv=document.createElement("div");
     gamerdiv.className="gamermap";
-    var gsize=8;
     gamerdiv.style.position = 'relative';
     gamerdiv.style.width = gsize * MAP_C +MAP_C + 'px';
     gamerdiv.style.height = gsize * MAP_R +MAP_R+ 'px';
-    gamer.style.border = '1px solid black';
+    //gamer.style.border = '1px solid black';
     for(var r = 0; r < MAP_R; r++) {
       for(var c = 0; c < MAP_C; c++) {
         var div = document.createElement('div');
@@ -984,7 +996,6 @@ function gamerboxini(){
       }
     }
     if(i==rNum){
-      $('atkdebug').innerHTML+="i=rNum";
       selectedgamer=gamer;
       selectedgamer.style.border="3px yellow solid";
     }
@@ -999,7 +1010,7 @@ function gamerboxini(){
 }
 function attackgamer(num){
   if(selectedgamer!=null)
-  var selectnum=selectedgamer.getElementsByClassName("gamernum")[0].innerHTML.split("玩家")[1];
+  var selectnum=selectedgamer.getElementsByClassName("gamernum")[0].innerHTML;
 else return
   debug.innerHTML=selectnum;
   socket.emit("atk",{//目标号，当前号，攻击值
@@ -1078,4 +1089,5 @@ function getwidth(char){
 }
 </script>
 <script type="text/javascript" src="autochange.js"></script>
+<script type="text/javascript" src="animate.js"></script>
 </html>

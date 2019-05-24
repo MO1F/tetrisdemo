@@ -30,6 +30,7 @@ function autochange(){
   var boheight=getheight('obottom');
   var theight=getheight('title');
   var roomlheight=39;
+  var exitheight=getheight('exit');
   $$('roomlist').style.height=height-theight-boheight-roomlheight-1+"px";
   //createroom
   var riheight=getheight('roominfo');
@@ -56,6 +57,7 @@ function autochange(){
   $$('ranking').style.height=height+"px";
   $$('recordbox').style.width=width/2.5+"px";
   //gamebox
+  $$('gamerlist').style.height=height-exitheight+"px";
   autochangegame();
   autogamebox();
   
@@ -90,6 +92,36 @@ function autogamebox(){
   $$('rightbox').style.width=(width-atktipswidth-gameboxwidth-8)/2+"px";
   $$('rightbox').style.height=height+"px";
   //$('atkdebug').innerHTML+=width+" "+atktipswidth+" "+gameboxwidth+" "+getwidth('leftbox')+" "+getwidth('rightbox')+"<br>";
+  //玩家列表显示
+  
+  var gamerlistheight=getheight('gamerlist');
+  var gamerlistwidth=getwidth('gamerlist');
+  var gamers=document.getElementsByClassName("gamer");
+  //$$('gamer').width=;
+  for(var i=0;i<gamers.length;i++){
+  	var cnum=4;
+  	if(gamers.length<=4){
+  		cnum=2;
+  	}
+  	var rnum=parseInt(gamers.length/cnum);
+  	if(gamers.length%cnum!=0){
+  		rnum++;
+  	}	
+  	$('atkdebug').innerHTML+="行数："+rnum+"  "+leftboxwidth+" <br>";
+  	sizeh=parseInt((gamerlistheight/rnum-6-10 -MAP_C)/MAP_C);
+  	sizew=parseInt(((leftboxwidth)/cnum - MAP_R)/MAP_R);
+  	
+  	if(sizeh>=sizew){
+  		gsize=sizew;
+  	}
+  	else{
+  		gsize=sizeh;
+  	}
+  	$('atkdebug').innerHTML+=sizeh+"高 宽"+sizew+"gsize"+gsize+"<br>";
+  	gamerboxini();
+  	
+  }
+  //vbtm
   var r1height=getheight('r1');
   var r2height=getheight('r2');
   $$('vbuttombox').style.top=(r1height+r2height)+50+"px";
@@ -171,6 +203,7 @@ function check() {
   var flag=true; 
   for(var v=0;v<Agents.length;v++) { 
      if(userAgentInfo.indexOf(Agents[v])>0) { 
+     	debug.innerHTML+=Agents[v];
        flag=false; 
        break; 
      } 
