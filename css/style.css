@@ -386,10 +386,8 @@ body{
 	height: 100%;
 }
 .gamerlist{
-	background: #0FD;
-	width: 95%;
-	margin: auto;
-	margin-top:40px;
+	width: 100%;
+	margin-top: 40px;
 }
 .stop{
 	position: absolute;
@@ -399,17 +397,19 @@ body{
 .gamername{
 	text-align: center;
 	font-size: 18px;
-	color:#d9d9d9;
+	height: 24px;
+	line-height: 24px;
+	color:#FFF;
 }
 .gamermap{
 	background: white;
-	border: 1px solid black;
 }
 .gamer{
-	width: 92px;
-	margin: 10px 5px;
-	background: #EAF;
+	margin-left: 10px;
+	margin-top: 5px;
+	background: #3a80e2;
 	float:left;
+	box-shadow:0 10px 50px 0 rgba(0,20,180,.1);
 }
 #playerslist{
 	background: #FFF;
@@ -439,13 +439,11 @@ body{
 	height: 100%;
 	position: relative;
 	left: 0px;
-	background-color: #407afc;
 }
 .rightbox{
 	float: left;
 	width: 200px;
 	height: 100%;
-	background-color:  #407afc;
 }
 .gbtmbox{
 	width: 100%;
@@ -463,7 +461,7 @@ body{
 	font-family: '微软雅黑','黑体','宋体';
 	font-weight: bolder;
 	line-height: 50px;
-	color:#115;
+	color:#FFF;
 }
 .inputname{
 	height: 30px;
@@ -471,7 +469,8 @@ body{
 	font-size: 20px;
 }
 .box{
-	background-color:  #407afc;
+	background:url(../img/bg2.jpg) no-repeat;
+	background-size: 100% 100%;
 	width: 1000px;
 	height: 560px;
 	display: none;
@@ -480,7 +479,6 @@ body{
 .r2{
 	width: 100%;
 	height:180px;
-	background:  #407afc;
 	padding-top: 10px;
 }
 .r2 div{
@@ -579,6 +577,7 @@ body{
 	font-size: 20px;
 	font-family: '微软雅黑','黑体','宋体';
 	line-height: 50px;
+	color: #fff;
 	font-weight: bolder;
 }
 #nextBlocks{
@@ -650,6 +649,7 @@ body{
 	}
 	.r1{
 		height: 30px;
+		color:#fff;
 	}
 	.r1 div{
 		font-size: 18px;
@@ -659,6 +659,7 @@ body{
 	.r2{
 		height:120px;
 		padding-top: 0px;
+		color: #fff;
 	}
 	.nextText{
 		font-size: 18px;
@@ -740,8 +741,9 @@ body{
 		font-size: 17px;
 	}
 	.gamerlist{
-
-	}
+		width: 100%;
+		margin-top: 30px;
+		}
 	.gamername{
 		font-size: 14px;
 	}
