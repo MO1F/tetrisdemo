@@ -6,6 +6,8 @@ body{
 	margin:0 0;
 	width: 100%;
 	height: 100%;
+
+	overflow:hidden;
 }
 #debug{
 	position: absolute;
@@ -588,6 +590,7 @@ body{
 	position: absolute;
 	top: 250px;
 	left: 900px;
+	color: white;
 }
 @media (max-width: 790px){
     .gtitle{
@@ -747,4 +750,13 @@ body{
 	.gamername{
 		font-size: 14px;
 	}
+}
+@keyframes atkanimate
+{
+	0% {height: 0%;background: yellow}
+	80% {height: 100%;background: yellow}
+	100% {background: transparent;}
+}
+.animate{
+	animation-timing-function:ease;
 }
