@@ -107,7 +107,7 @@ function autogamebox(){
   	if(gamers.length%cnum!=0){
   		rnum++;
   	}	
-  	$('atkdebug').innerHTML+="行数："+rnum+"  "+leftboxwidth+" <br>";
+  	//$('atkdebug').innerHTML+="行数："+rnum+"  "+leftboxwidth+" <br>";
   	sizeh=parseInt((gamerlistheight/rnum-6-10 -MAP_C)/MAP_C);
   	sizew=parseInt(((leftboxwidth)/cnum - MAP_R)/MAP_R);
   	
@@ -117,7 +117,7 @@ function autogamebox(){
   	else{
   		gsize=sizeh;
   	}
-  	$('atkdebug').innerHTML+=sizeh+"高 宽"+sizew+"gsize"+gsize+"<br>";
+  	//$('atkdebug').innerHTML+=sizeh+"高 宽"+sizew+"gsize"+gsize+"<br>";
   	gamerboxini();
   	
   }

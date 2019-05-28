@@ -124,7 +124,7 @@
     <div class="downButtom vButtom" onclick="clickbtm(KEY_ACCELERATE)"></div>
     <div class="rightButtom vButtom" onclick="clickbtm(KEY_RIGHT)"></div>
   </div>
-     <div id="atkdebug" style="display: none;" ></div>
+     <div id="atkdebug" ></div>
 </div>
  
   <div id="debug" style="display: none"></div>
@@ -132,9 +132,9 @@
 <script src="https://cdn.bootcss.com/socket.io/2.2.0/socket.io.js"></script>
 <script type="text/javascript" src="change.js"></script>
 <script type="text/javascript" src="tetris.js"></script>
-
+<script type="text/javascript" src="animate.js"></script>
 <script>
-//定义游戏开始标识
+//定义游戏开始标识style="display: none;" 
 var gstart=false;
 var phoneflag=true;
 /*——————————————————————————————————————————————联机游戏相关定义参数————————————————————————————————————————————————————————*/
@@ -207,6 +207,7 @@ socket.on("atkinfo",function(data){
     var aimnumber=data.atkrecord[i].aimnumber;
     var thisnumber=data.atkrecord[i].thisnumber;
     var atknum=data.atkrecord[i].atknum;
+    atkanimat(thisnumber,aimnumber);
    //$('atkdebug').innerHTML+=thisnumber+"攻击"+aimnumber+"增加了"+atknum+"行方块<br>";
     if(aimnumber==playerNumber){
       addnum+=atknum;
@@ -708,7 +709,7 @@ function sleep(delay) {
 ////////////////////////////////////服务器相关函数///////////////////////////////////////////////////////////////////////////////////////////
 
 function linkserver(){//localhost:3000
-  socket=io("ws://207.148.13.235:3001");////207.148.13.235:3001
+  socket=io("ws://localhost:3001");////207.148.13.235:3001
   socket.on('conn',function(data){
         if(data.false==false){
           deubg.innerHTML+="连接出错";
@@ -1089,5 +1090,4 @@ function getwidth(char){
 }
 </script>
 <script type="text/javascript" src="autochange.js"></script>
-<script type="text/javascript" src="animate.js"></script>
 </html>
