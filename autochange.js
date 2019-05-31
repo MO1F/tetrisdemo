@@ -1,4 +1,5 @@
 onload=autochange()
+var rotateflag=false;
 function $$(char){
   	return document.getElementsByClassName(char)[0];
 }
@@ -9,10 +10,10 @@ function autochangetimer(){
 }
 function autochange(){
 	debug.innerHTML="高："+height+"  宽"+width;
-	if(phoneflag==false){
+	/*if(phoneflag==false){
 		phoneflag=check();
 		return;
-	}
+	}*/
 	phoneflag=check();
   bgm.volume=musicvalue/MAx_musicvalue;
   se.volume=sevalue/MAx_musicvalue;
@@ -25,7 +26,28 @@ function autochange(){
   height=document.documentElement.clientHeight;
   detectOrient1();
   //body
-  document.body.style.height=height-30+"px";
+  if(rotateflag==true){
+    document.body.style.height=width+"px";
+    document.body.style.width=height+"px";
+    document.body.style.transform="rotate(90deg)";
+  }
+  else{
+    document.body.style.height=height+"px";
+    document.body.style.width=width+"px";
+    document.body.style.transform="rotate(0deg)";
+  }
+  //menu
+  var menudiv=$$("menubox");
+  var gtitle=$$("gtitle");
+  if(height<menudiv.getBoundingClientRect().height+gtitle.getBoundingClientRect().height+30){
+    menudiv.style.marginTop=0+"px";
+    gtitle.style.margin="0 auto";
+  }
+  else{
+    menudiv.style.marginTop=20+"px";
+    gtitle.style.margin="5 auto";
+  }
+  //document.body.style.width=width+"px";
   //roomlist
   var boheight=getheight('obottom');
   var theight=getheight('title');
@@ -62,17 +84,23 @@ function autochange(){
   autogamebox();
   
 }
+var fnum=0;
 function detectOrient1(){
 	if(width<=height){
 		document.body.style.transform="rotate(+90deg)";
-			width=document.documentElement.clientHeight;
-			height=document.documentElement.clientWidth;
+    rotateflag=true;
+    if(fnum==0){
+      F5();
+      fnum++;
+    }
 	}
 	else{
 		document.body.style.transform="rotate(0)";
-			width=document.documentElement.clientWidth;
-  			height=document.documentElement.clientHeight;
+    rotateflag=false;
 	}
+  //document.getElementsByClassName('gtitle')[0].innerHTML="宽"+width+"高"+height;
+  width=document.documentElement.clientWidth;
+  height=document.documentElement.clientHeight;
 }
 
 function autogamebox(){
@@ -161,23 +189,27 @@ function autogamebox(){
 }
 
 function detectOrient() {
-        var width = document.documentElement.clientWidth,
-                height = document.documentElement.clientHeight,
-                wrapper = document.body,
+                width = document.documentElement.clientWidth;
+                height = document.documentElement.clientHeight;
+                alert("sfsadfas");
+                
+                wrapper = document.body;
                 style = "";
         if(width >= height) { // 竖屏
+            rotateflag=true;
             style += "width:100%"; 
             style += "height:100%;";
             style += "-webkit-transform: rotate(0); transform: rotate(0);";
             style += "-webkit-transform-origin: 0 0;";
-            style += "transform-origin: 0 0;";
+            //style += "transform-origin: 0 0;";
         } else { // 横屏
+            rotateflag=false;
             style += "width:" + height + "px;";// 注意旋转后的宽高切换
             style += "height:" + width + "px;";
             style += "-webkit-transform: rotate(90deg); transform: rotate(90deg);";
             // 注意旋转中点的处理
             style += "-webkit-transform-origin: " + width / 2 + "px " + width / 2 + "px;";
-            style += "transform-origin: " + width / 2 + "px " + width / 2 + "px;";
+            //style += "transform-origin: " + width / 2 + "px " + width / 2 + "px;";
         }
         wrapper.style.cssText = style;
 }
@@ -195,7 +227,9 @@ function autochangegame(){
 		initatktips();
 	}
 }
-
+function F5(){
+  window.location.href = window.location.href;
+}
 
 function check() { 
   var userAgentInfo=navigator.userAgent; 
