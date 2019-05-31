@@ -30,11 +30,13 @@ function autochange(){
     document.body.style.height=width+"px";
     document.body.style.width=height+"px";
     document.body.style.transform="rotate(90deg)";
+    document.body.style.backgroundImage="url('img/tetris2.jpg')";
   }
   else{
     document.body.style.height=height+"px";
     document.body.style.width=width+"px";
     document.body.style.transform="rotate(0deg)";
+    document.body.style.backgroundImage="url('img/tetris.jpg')";
   }
   //menu
   var menudiv=$$("menubox");
@@ -87,7 +89,7 @@ function autochange(){
 var fnum=0;
 function detectOrient1(){
 	if(width<=height){
-		document.body.style.transform="rotate(+90deg)";
+		//document.body.style.transform="rotate(+90deg)";
     rotateflag=true;
     if(fnum==0){
       F5();
@@ -95,7 +97,7 @@ function detectOrient1(){
     }
 	}
 	else{
-		document.body.style.transform="rotate(0)";
+		//document.body.style.transform="rotate(0)";
     rotateflag=false;
 	}
   //document.getElementsByClassName('gtitle')[0].innerHTML="宽"+width+"高"+height;
