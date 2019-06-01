@@ -692,6 +692,7 @@ function easeBlock() {//清除当前方块的痕迹
       }
       if(currC + c<0)continue;
       if(currC + c>=MAP_C)continue;
+      if(currR + r>=MAP_R)continue;
       if(map[r+currR][c+currC].b==0){
         var div = $((currR + r) + '-' + (currC + c));
         div.style.border = '1px solid ' + 'transparent';
