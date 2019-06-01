@@ -515,6 +515,7 @@ document.onkeydown = function(event) {
     currR = shadow.r;
     currC = shadow.c;
     drawBlock();  //绘制方块
+    loop();
   }else if(keyCode==KEY_R||keyCode==KEY_r){
     pause=0;
     Grade=0;
