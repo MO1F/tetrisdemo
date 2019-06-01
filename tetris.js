@@ -32,9 +32,9 @@ var changeaddnum=0;
 var addBlock=false;//判断是否增加行标记
 
 //定义刷新时间变量
-var gtime=700;//方块速度
-var gtime_default=500;//默认速度
-var hardgitime=350;//高难度初始速度
+var gtime=1200;//方块速度
+var gtime_default=1200;//默认速度
+var hardgitime=600;//高难度初始速度
 //定义方块大小
 var BLOCK_R = 4;
 var BLOCK_C = 4;
@@ -770,7 +770,7 @@ function speedchange(){
   if(gtime<=150){
     return;
   }
-  gtime-=10;
+  gtime-=5;
   clearInterval(timer);//清除计时器timer
   timer = setInterval(loop, gtime);  //建立计时器timer
 }

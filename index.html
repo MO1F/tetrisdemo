@@ -75,8 +75,8 @@
     <div class="opcenter">
       <div class="attribute">音量：<input type="range" id="video" min="0" max="100" step="1" onchange="changevolume()" class="range"/></div>
       <div class="attribute">音效：<input type="range" id="se" min="0" max="100" step="1" onchange="changeSevolume()" class="range"/></div>
-      <div class="attribute">难度：<input name="rank" type="radio" value="1" onclick="changehard(this.value)" />简单
-                              <input name="rank" type="radio" value="2" onclick="changehard(this.value)" />普通</div>
+      <div class="attribute">难度：<input name="rank" type="radio" value="0" onclick="changehard(this.value)" />简单
+                              <input name="rank" type="radio" value="1" onclick="changehard(this.value)" />普通</div>
     </div>
     <div class="btmbox">
       <div class="button btm" onclick="exitshift('option')" onmouseover="mon(this)" onmouseout="moff(this)">返回</div>
@@ -358,8 +358,8 @@ function $(id) {////写引号
 var musicvalue=30;
 var musicvalue_default=30;
 var MAx_musicvalue=100;
-var attribute=1;
-var attribute_default=1;
+var attribute=0;
+var attribute_default=0;
 var sevalue=20;
 var sevalue_deafault=10;
 
@@ -833,7 +833,13 @@ function displayroom(){//显示房间列表
       div.appendChild(div1);
        var div1=document.createElement('div');
       div1.className="roomflag";
-      div1.innerHTML=rooms[i].flag;
+      if(rooms[i].flag==true){
+        div1.innerHTML="已满";
+      }
+      else{
+        div1.innerHTML="可以加入";
+      }
+      
       div.appendChild(div1);
 
       rlist.appendChild(div);
