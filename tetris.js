@@ -728,8 +728,9 @@ function easemap(){
       map[r][c] = {};
       map[r][c].b = 0;
       var div=$(r+'-'+c);
-      //div.style.backgroundColor = 'transparent';
+      div.style.backgroundColor = 'transparent';
       div.style.border = '1px solid ' + 'transparent';
+      div.className="";
     }
   }
 }
