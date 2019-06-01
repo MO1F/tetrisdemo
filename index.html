@@ -714,7 +714,7 @@ function sleep(delay) {
 ////////////////////////////////////服务器相关函数///////////////////////////////////////////////////////////////////////////////////////////
 
 function linkserver(){//localhost:3001
-  socket=io("ws://localhost:3001");////155.138.131.33:3001
+  socket=io("ws://155.138.131.33:3001");////155.138.131.33:3001
   socket.on('conn',function(data){
         if(data.false==false){
           deubg.innerHTML+="连接出错";
