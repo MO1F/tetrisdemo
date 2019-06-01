@@ -683,10 +683,17 @@ function drawBlock() {//绘制当前方块
 function easeBlock() {//清除当前方块的痕迹
   for(var r = 0; r < BLOCK_R; r++)
     for(var c = 0; c < BLOCK_C; c++) {
+      if(currR + r<0)continue;
       if(BLOCKS[currType][currDir][r][c]) {
-        if(currR + r<0)continue;
         var div = $((currR + r) + '-' + (currC + c));
-        //div.style.backgroundColor = 'transparent';
+        //div.style.backgroundColor = 'red';
+        div.style.border = '1px solid ' + 'transparent';
+        div.className="";
+      }
+      if(currC + c<0)continue;
+      if(currC + c>=MAP_C)continue;
+      if(map[r+currR][c+currC].b==0){
+        var div = $((currR + r) + '-' + (currC + c));
         div.style.border = '1px solid ' + 'transparent';
         div.className="";
       }
