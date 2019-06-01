@@ -80,6 +80,7 @@ function autochange(){
   //ranking
   $$('ranking').style.height=height+"px";
   $$('recordbox').style.width=width/2.5+"px";
+  $$('recordbox').style.height=height-theight+"px";
   //gamebox
   $$('gamerlist').style.height=height-exitheight+"px";
   autochangegame();
