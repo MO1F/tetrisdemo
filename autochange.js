@@ -230,7 +230,7 @@ function autochangegame(){
 	}
 }
 function F5(){
-  window.location.href = window.location.href;
+  
 }
 
 function check() { 

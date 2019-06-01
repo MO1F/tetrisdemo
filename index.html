@@ -124,7 +124,7 @@
     <div class="downButtom vButtom" onclick="clickbtm(KEY_ACCELERATE)"></div>
     <div class="rightButtom vButtom" onclick="clickbtm(KEY_RIGHT)"></div>
   </div>
-     <div id="atkdebug" ></div>
+     <div id="atkdebug" style="display: none;" ></div>
 </div>
  
   <div id="debug" style="display: none"></div>
@@ -134,7 +134,7 @@
 <script type="text/javascript" src="tetris.js"></script>
 <script type="text/javascript" src="animate.js"></script>
 <script>
-//定义游戏开始标识style="display: none;" 
+//定义游戏开始标识
 var gstart=false;
 var phoneflag=true;
 /*——————————————————————————————————————————————联机游戏相关定义参数————————————————————————————————————————————————————————*/
@@ -180,6 +180,7 @@ initatktips();
 gamerboxini();
 var killnumdiv=document.createElement('div');
 killnumdiv.className="r1";
+killnumdiv.id="killnumdiv";
 var killtext=document.createElement('div');
 killtext.innerHTML="击败数：";
 killnumdiv.appendChild(killtext);
@@ -787,6 +788,9 @@ function jroom(){//进入房间获取数据并显示
 }
 function returnroom(){
   jroom();
+  var killdiv=$("killnumdiv");
+  var rightboxdiv=$$('rightbox');
+  rightboxdiv.removeChild(killdiv);
   socket.emit('returnroom');
 }
 function enterroom(){
